@@ -37,7 +37,7 @@
 		<!-- cucumber options -->
 		<cucumber.stepsDefinitions>--glue / </cucumber.stepsDefinitions>
 		<cucumber.hooks>--glue	com/crowdar/bdd/cukes/hooks</cucumber.hooks>
-		<cucumber.tags>@NuevoWorkspaceExitoso</cucumber.tags>
+		<cucumber.tags>@ActualizacionDeWorkspaceExitoso</cucumber.tags>
 		<pretty.plugin>--plugin pretty</pretty.plugin>
 		<cucumber.report>--plugin lippia.web.reporters.CucumberReporter:</cucumber.report>
 		<test-manager.report>--plugin lippia.web.reporters.TestManagerReporter:</test-manager.report>
@@ -158,6 +158,15 @@
 			<artifactId>zstd-jni</artifactId>
 			<version>1.5.5-11</version>
 		</dependency>
+
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>4.4.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+
 	</dependencies>
 	<build>
 		<filters>

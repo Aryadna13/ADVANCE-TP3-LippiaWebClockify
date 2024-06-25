@@ -9,8 +9,12 @@ import lippia.web.services.LogInService;
 
 public class LogInSteps {
 
+    @And("clickeo el boton (.*) del ultimo workspace$")
+    public void clickeoElBotonDelWorkspace(String Boton){
+        LogInService.lastButton(Boton);
+    }
 
-    @And("clickeo el boton (.*)$")
+    @And("clickeo el boton (.*)")
     public void clickeoElBotonLoginLandingPage(String Boton){
         LogInService.commonButton(Boton);
     }
