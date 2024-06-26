@@ -35,4 +35,15 @@ public class ApiHelper {
                 .header("Content-Type", "application/json")
                 .delete(url);
     }
+
+
+    public static Response sendPatchRequest(String url, String body) {
+        return RestAssured
+                .given()
+                .header("Content-Type", "application/json")
+                .header("x-api-key", "MTc1YTM3NzMtMmM4YS00NmY1LTg4NGQtZWFiYzE1YjE5ZDUx")
+                .body(body)
+                .patch(url);
+    }
+
 }

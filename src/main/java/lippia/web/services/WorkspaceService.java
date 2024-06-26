@@ -28,11 +28,8 @@ public class WorkspaceService {
     }
 
     public static void lastButton(String botonGenerico) {
-
         WebDriver driver = DriverManager.getDriverInstance();
-
         WebElement lastElement = driver.findElement(By.xpath("//button[@type='button' and @tabindex='0' and @ngbautofocus='false' and contains(@class, 'cl-btn cl-btn-primary cl-ml-3 cl-d-print-none') and text()=' Settings ']"));
-
         lastElement.click();
     }
 
