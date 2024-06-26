@@ -1,8 +1,15 @@
 package lippia.web.services;
 
 import com.crowdar.core.actions.WebActionManager;
+import com.crowdar.driver.DriverManager;
 import lippia.web.constants.CommonConstants;
 import lippia.web.constants.LogInConstants;
+import lippia.web.constants.MyAccountConstants;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
 import java.io.InputStream;
@@ -67,9 +74,51 @@ public class BasicFunctionsService {
         return sb.toString();
     }
 
+    public static void scroll(WebElement element) {
+        JavascriptExecutor jse = DriverManager.getDriverInstance();
+        jse.executeScript("arguments[0].scrollIntoView()", new Object[]{element});
+    }
+
 
     public static void validCheck(String chek) {
-        Assert.assertTrue(WebActionManager.isPresent(CommonConstants.VALID_MESSAGE_XPATH),chek);
+        Assert.assertTrue(WebActionManager.isPresent(CommonConstants.VALID_MESSAGE_XPATH), chek);
+    }
+
+    public static void verifyLanguage(String language) {
+        WebActionManager.click(MyAccountConstants.MY_ACCOUNT_BUTTON);
+        System.out.println("do it 1");
+        WebActionManager.click(MyAccountConstants.SETTINGS_BUTTON);
+        System.out.println("do it 2");
+      WebActionManager.click(MyAccountConstants.LANGUAGE_BUTTON);
+        System.out.println("do it 3");
+        WebDriver driver = new ChromeDriver();
+        driver = DriverManager.getDriverInstance();
+        WebElement element = driver.findElement(By.xpath(MyAccountConstants.LANGUAGE_BUTTON));
+        scroll(element);
+      /*    switch (language) {
+            case "es":
+                WebActionManager.setDropdownByIndex(MyAccountConstants.LANGUAGE_SELECTOR,3,"3");
+                System.out.println("do it 4");
+                break;
+            case "en":
+                WebActionManager.setDropdownByIndex(MyAccountConstants.LANGUAGE_SELECTOR,2,"2");
+                System.out.println("do it 4");
+                break;
+        }*/
+
+        switch (language) {
+            case "es":
+                WebActionManager.click(MyAccountConstants.LANGUAGE_SELECTOR);
+                System.out.println("do it 4");
+                break;
+            case "en":
+                WebActionManager.click(MyAccountConstants.LANGUAGE_BUTTON);
+                System.out.println("do it 4");
+                break;
+        }
+
+
 
     }
 }
+

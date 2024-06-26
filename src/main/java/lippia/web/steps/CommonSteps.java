@@ -5,6 +5,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import lippia.web.services.BasicFunctionsService;
 import lippia.web.services.LogInService;
 
 public class CommonSteps {
@@ -18,5 +19,10 @@ public class CommonSteps {
     public void meEncuentroElEnHomeDeUsuariosLogueadoConUnYValidos(String usuario, String password) {
         WebActionManager.navigateTo("https://app.clockify.me/en/login");
         LogInService.usuarioyPassword(usuario,password);
+    }
+
+    @Given("la pagina esta en (.*)")
+    public void laPaginaEstaEn(String idioma) {
+        BasicFunctionsService.verifyLanguage(idioma);
     }
 }

@@ -21,10 +21,6 @@ public class LogInService extends ActionManager {
         click(CommonConstants.COMMON_BUTTON, boton);
     }
 
-    public static void lastButton(String botonGenerico) {
-        String boton = BasicFunctionsService.removeQuotes(botonGenerico);
-        click(WorkspaceConstants.CONTENEDOR_ULTIMO_WORKSPACE, boton);
-    }
 
     public static void usuarioyPassword(String usuario, String password) {
         BasicFunctionsService.usuarioyPassword(usuario, password);

@@ -6,18 +6,16 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;;
 import lippia.web.services.LogInService;
+import lippia.web.services.WorkspaceService;
 
 public class LogInSteps {
 
-    @And("clickeo el boton (.*) del ultimo workspace$")
+    @And("clickea el boton (.*) del ultimo workspace$")
     public void clickeoElBotonDelWorkspace(String Boton){
-        LogInService.lastButton(Boton);
+        WorkspaceService.lastButton(Boton);
     }
 
-    @And("clickeo el boton (.*)")
-    public void clickeoElBotonLoginLandingPage(String Boton){
-        LogInService.commonButton(Boton);
-    }
+
 
     @And("ingreso un {string}, un {string} y clikeo el boton Log In")
     public void ingresoUnYUn(String usuario, String password) {

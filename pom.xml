@@ -37,7 +37,7 @@
 		<!-- cucumber options -->
 		<cucumber.stepsDefinitions>--glue / </cucumber.stepsDefinitions>
 		<cucumber.hooks>--glue	com/crowdar/bdd/cukes/hooks</cucumber.hooks>
-		<cucumber.tags>@ActualizacionDeWorkspaceExitoso</cucumber.tags>
+		<cucumber.tags>@unico</cucumber.tags>
 		<pretty.plugin>--plugin pretty</pretty.plugin>
 		<cucumber.report>--plugin lippia.web.reporters.CucumberReporter:</cucumber.report>
 		<test-manager.report>--plugin lippia.web.reporters.TestManagerReporter:</test-manager.report>
@@ -162,9 +162,10 @@
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
-			<version>4.4.0</version>
+			<version>5.4.0</version>
 			<scope>compile</scope>
 		</dependency>
+
 
 
 	</dependencies>

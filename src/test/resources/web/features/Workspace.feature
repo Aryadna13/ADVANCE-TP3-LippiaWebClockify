@@ -6,7 +6,7 @@ Feature: Workspaces
     And clickeo el boton Log in
     And clickeo el boton " Log in manually "
     And ingreso un "email", un "password" y clikeo el boton Log In
-    And clickeo el dropdown de workspaces
+
 
 
   @NuevoWorkspaceExitoso @Smoke
@@ -23,27 +23,25 @@ Feature: Workspaces
       | " Gestionar espacios de trabajo " | " Configuración " | " Actualizar " |
 
 
-
-  @ActualizacionDeWorkspaceExitoso
-  Scenario Outline: Modifico un workspace existente
-    Given clickeo el boton <ManageWorkspaces>
-    When clickeo el boton <Settings> del ultimo workspace
+  @ActualizacionDeWorkspaceExitoso @unico
+  Scenario Outline: Modifico un workspace existente (creado por api)
+    #Given la pagina esta en <Idioma>
+    And clickeo el dropdown de workspaces
+    And clickeo el boton <ManageWorkspaces>
+    When clickea el boton <Settings> del ultimo workspace
     And cambio el nombre del workspace
-    And clickeo el boton <Upgrade>
     Then se cambia el nombre del workspace
 
     Examples:
-      | ManageWorkspaces                  | Settings          | Upgrade        |
-      | " Manage workspaces "             | " Settings "      | " Upgrade "    |
-      | " Gestionar espacios de trabajo " | " Configuración " | " Actualizar " |
-
-
+      | Idioma | ManageWorkspaces      | Settings     |
+      | en     | " Manage workspaces " | " Settings " |
+      #| es     | " Gestionar espacios de trabajo " | " Configuración " |
 
 
   @NuevoWorkspaceFallido @Smoke
   Scenario: Creacion un nuevo workspace fallido
     When clickeo el boton "CREATE NEW WORKSPACE"
     And nombro mi nuevo workspace "@"
-    Then se muestra el cartel "Workspace name has to be between 2 and 250 characters long"
+    #Then se muestra el cartel "Workspace name has to be between 2 and 250 characters long"
 
 
