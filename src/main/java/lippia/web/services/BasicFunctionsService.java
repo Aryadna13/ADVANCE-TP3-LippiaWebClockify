@@ -12,6 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 
@@ -85,8 +87,9 @@ public class BasicFunctionsService {
     }
 
 
-    public static void validCheck(String chek) {
-        Assert.assertTrue(WebActionManager.isPresent(CommonConstants.VALID_MESSAGE_XPATH), chek);
+    public static void validCheck() {
+        WebActionManager.click(CommonConstants.COMMON_BUTTON, " Create ");
+        Assert.assertTrue(WebActionManager.isPresent(CommonConstants.VALID_MESSAGE_XPATH));
     }
 
     public static void verifyLanguage(String language) {
@@ -100,16 +103,6 @@ public class BasicFunctionsService {
         driver = DriverManager.getDriverInstance();
         WebElement element = driver.findElement(By.xpath(MyAccountConstants.LANGUAGE_BUTTON));
         scroll(element);
-      /*    switch (language) {
-            case "es":
-                WebActionManager.setDropdownByIndex(MyAccountConstants.LANGUAGE_SELECTOR,3,"3");
-                System.out.println("do it 4");
-                break;
-            case "en":
-                WebActionManager.setDropdownByIndex(MyAccountConstants.LANGUAGE_SELECTOR,2,"2");
-                System.out.println("do it 4");
-                break;
-        }*/
 
         switch (language) {
             case "es":
@@ -123,43 +116,37 @@ public class BasicFunctionsService {
         }
 
     }
-        public static class DownloadFileTest {
 
-            public void main(String[] args) {
-                // Configura la ruta del driver de Chrome
-                System.setProperty("webdriver.chrome.driver", "C:\\Users\\garci\\.m2\\repository\\chromedriver\\124.0.6367.91\\chromedriver-win64");
+    public static class DownloadFileTest {
 
-                // Configura la ruta de descarga
-                String downloadFilepath = "C:\\Workspace";
-                Map<String, Object> prefs = new HashMap<>();
-                prefs.put("profile.default_content_settings.popups", 0);
-                prefs.put("download.default_directory", downloadFilepath);
-                prefs.put("download.prompt_for_download", false);
-                prefs.put("plugins.always_open_pdf_externally", true);
+        public void main(String[] args) {
+            // Configura la ruta del driver de Chrome
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\emanu\\.m2\\repository\\chromedriver\\124.0.6367.91\\chromedriver-win64");
 
-                // Configura las opciones de Chrome
-                ChromeOptions options = new ChromeOptions();
-                options.setExperimentalOption("prefs", prefs);
+            // Configura la ruta de descarga
+            String downloadFilepath = "E:\\Workspace";
+            Map<String, Object> prefs = new HashMap<>();
+            prefs.put("profile.default_content_settings.popups", 0);
+            prefs.put("download.default_directory", downloadFilepath);
+            prefs.put("download.prompt_for_download", false);
+            prefs.put("plugins.always_open_pdf_externally", true);
 
-                // Inicializa el driver de Chrome con las opciones configuradas
-                WebDriver driver = new ChromeDriver(options);
+            ChromeOptions options = new ChromeOptions();
+            options.setExperimentalOption("prefs", prefs);
 
-                try {
-                    // Realiza la acción para exportar a PDF
-                    WebActionManager.click(ReportsConstants.EXPORT_PDF_BUTTON);
+            WebDriver driver = new ChromeDriver(options);
 
-                    // Esperar que el archivo se descargue (opcional)
-                    Thread.sleep(5000); // Añade un tiempo de espera si es necesario
+        }
+    }
 
-                    // Verificar que el archivo se ha descargado (opcional)
-                    // File file = new File(downloadFilepath + "/expectedFileName.pdf");
-                    // if (file.exists()) {
-                    //     System.out.println("El archivo se ha descargado correctamente.");
-                    // } else {
-                    //     System.out.println("El archivo no se ha descargado.");
-                    // }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }}
+    public static void genericTouch(String locator){
+        WebDriver driver;
+        driver = DriverManager.getDriverInstance();
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement exportButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", exportButton);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", exportButton);
+
+    }
+}

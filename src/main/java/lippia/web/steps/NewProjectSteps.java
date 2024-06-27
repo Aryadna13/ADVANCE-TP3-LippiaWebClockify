@@ -13,8 +13,4 @@ public class NewProjectSteps {
     public void nombroMiProyecto(String NuevoProyecto) {
         NewProjectService.nombreDeNuevoProyecto(NuevoProyecto);
     }
-
-    @Then("se crea un nuevo {string}")
-    public void seCreaUnNuevo(String arg0) {
-    }
 }

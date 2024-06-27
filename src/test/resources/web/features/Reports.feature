@@ -1,4 +1,4 @@
-@Regression @Reports
+@Regression @Reports @oki
 Feature: obtengo un report
 
   Background:
@@ -7,8 +7,7 @@ Feature: obtengo un report
     And clickeo el boton " Log in manually "
     And ingreso un "email", un "password" y clikeo el boton Log In
 
-
-    @exportoMiReporte @ok
+    @exportoMiReporteAPDF
     Scenario: a pdf
       When clickeo el boton "Reports"
       And clickea el boton Export

@@ -1,4 +1,4 @@
-@Regression @TimeTracker
+@Regression @TimeTracker @ok
 Feature: Creo un nuevo Workspace
 
   Background:
@@ -17,28 +17,27 @@ Feature: Creo un nuevo Workspace
     Then se crea un nuevo time entry
 
 
-  @ModificoElRegistroDeHoras @----nomesale
+  @ModificoElRegistroDeHoras
   Scenario: Creo un nuevo registro de horas por API y modifico los datos del time entry
+    And valido estar en el Workspace correcto
     And clickeo el boton " Stop "
-    And clickea el boton Project
-    When clickeo el boton "LippiaFinalProject "
+    When clickea el boton Project
     And clickeo el boton "ProyectoCrowdar "
     And clickea el boton Tags
     And clickeo el boton "Crowdar"
     And clickeo el boton " $ "
     And modifico la hora de inicio "09:00"
     And modifico la hora de finalizacion "18:00"
-    And selecciono el dia "13" del calendario
     Then se modifica el time entry
 
 
-  @CreoHorasYLasDescarto @--exito
+  @CreoHorasYLasDescarto
   Scenario: Creo un nuevo registro de horas pero lo cancelo
     And clickeo el boton "TIME TRACKER"
     And clickeo el timer relojito
     When clickeo el boton " Start "
     And clickeo los tres puntitos laterales
     And clickeo el boton " Discard"
-    And clickeo el boton " Discard "
+    And cancelo el registro
     Then se cancela la creacion del timeEntry
 

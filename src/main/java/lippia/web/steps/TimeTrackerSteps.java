@@ -5,8 +5,13 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import lippia.web.constants.CommonConstants;
+import lippia.web.constants.TimeTrackerConstants;
+import lippia.web.services.BasicFunctionsService;
 import lippia.web.services.LogInService;
 import lippia.web.services.TimeTrackerService;
+import lippia.web.services.WorkspaceService;
+import org.testng.Assert;
 
 public class TimeTrackerSteps {
 
@@ -14,9 +19,9 @@ public class TimeTrackerSteps {
 
     @Before(value = "@ModificoElRegistroDeHoras")
     public void before() {
-        apiHelper.sendPostRequest("https://api.clockify.me/api/v1/workspaces/6679dc23842d3958e3ee2108/time-entries", "{\"description\": \"TimeEntryDeApi\"}");
-        apiHelper.sendPostRequest("https://api.clockify.me/api/v1/workspaces/6679dc23842d3958e3ee2108/projects", "{\"name\": \"ProyectoCrowdar\"}");
-        apiHelper.sendPostRequest("https://api.clockify.me/api/v1/workspaces/6679dc23842d3958e3ee2108/tags", "{\"name\": \"Crowdar\"}");
+        apiHelper.sendPostRequest("https://api.clockify.me/api/v1/workspaces/6537291f940183327c06fc57/time-entries", "{\"description\": \"TimeEntryDeApi\"}");
+        apiHelper.sendPostRequest("https://api.clockify.me/api/v1/workspaces/6537291f940183327c06fc57/projects", "{\"name\": \"ProyectoCrowdar\"}");
+        apiHelper.sendPostRequest("https://api.clockify.me/api/v1/workspaces/6537291f940183327c06fc57/tags", "{\"name\": \"Crowdar\"}");
 
     }
 
@@ -43,11 +48,6 @@ public class TimeTrackerSteps {
         TimeTrackerService.timeEntry(horaInicio);
     }
 
-    @And("seteo una hora final (.*)$")
-    public void seteoUnaHoraFinal(String horaFinal) {
-        TimeTrackerService.timeEntryfinal(horaFinal);
-    }
-
 
     @And("clickeo el timer relojito")
     public void clickeoElTimerRelojito() {
@@ -55,43 +55,62 @@ public class TimeTrackerSteps {
     }
 
     @And("clickeo los tres puntitos laterales")
-    public void clickeoLosTresPuntitosLaterales() {
+    public void clickeoLosTresPuntitosLaterales() throws InterruptedException {
         TimeTrackerService.puntitoslaterales();
     }
 
     @Then("se cancela la creacion del timeEntry")
-    public void seCancelaLaCreacionDelTimeEntry() {
+    public void seCancelaLaCreacionDelTimeEntry() throws InterruptedException {
+        Thread.sleep(200);
         TimeTrackerService.validarTimeEntryCancelado();
     }
 
 
     @Then("se modifica el time entry")
     public void seModificaElTimeEntry() {
-        //<div class="ng-tns-c78-28 toast-title ng-star-inserted" aria-label="Successfully updated description" style=""> Successfully updated description <!----></div>
+        TimeTrackerService.validaciones();
+        TimeTrackerService.restauracion();
     }
 
     @And("modifico la hora de inicio (.*)")
-    public void modificoLaHoraDeInicio(String hora) {
-        TimeTrackerService.editBegginigTimeEntry(hora);
+    public void modificoLaHoraDeInicio(String hora) throws InterruptedException {
+        String boton = BasicFunctionsService.removeQuotes(hora);
+        TimeTrackerService.editTimeEntry(boton, "1");
     }
 
     @And("modifico la hora de finalizacion (.*)")
-    public void modificoLaHoraDeFinalizacion(String hora) {
-        TimeTrackerService.editEndingTimeEntry(hora);
+    public void modificoLaHoraDeFinalizacion(String hora) throws InterruptedException {
+        String boton = BasicFunctionsService.removeQuotes(hora);
+        TimeTrackerService.editTimeEntry(boton, "2");
     }
 
-    @And("selecciono el dia (.*) del calendario")
-    public void seleccionoElDiaDelCalendario(String arg0) {
+    @And("cambio el dia del calendario")
+    public void cambioElDiaDelCalendario() {
         TimeTrackerService.editCalendar();
     }
 
     @When("clickea el boton Project")
     public void clickeaElBotonProject() {
-TimeTrackerService.projectSelect();
+        BasicFunctionsService.genericTouch(TimeTrackerConstants.PROJECT_BUTTON);
     }
 
     @And("clickea el boton Tags")
     public void clickeaElBotonTags() {
         TimeTrackerService.tagButton();
+    }
+
+    @And("valido estar en el Workspace correcto")
+    public void validoEstarEnElWorkspaceCorrecto() throws InterruptedException {
+        WorkspaceService.dropDownWorkspace();
+        LogInService.commonButton(" Manage workspaces ");
+        String Boton = " Settings ";
+        WorkspaceService.prepareFirstData(Boton);
+        WorkspaceService.clickOnTimer();
+    }
+
+    @And("cancelo el registro")
+    public void canceloElRegistro() {
+        WebActionManager.waitVisibility(TimeTrackerConstants.DISCARD);
+        WebActionManager.click(TimeTrackerConstants.DISCARD);
     }
 }

@@ -19,6 +19,7 @@ public class LogInService extends ActionManager {
     public static void commonButton(String botonGenerico) {
         String boton = BasicFunctionsService.removeQuotes(botonGenerico);
         click(CommonConstants.COMMON_BUTTON, boton);
+
     }
 
 

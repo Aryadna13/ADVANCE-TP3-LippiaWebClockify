@@ -37,12 +37,13 @@
 		<!-- cucumber options -->
 		<cucumber.stepsDefinitions>--glue / </cucumber.stepsDefinitions>
 		<cucumber.hooks>--glue	com/crowdar/bdd/cukes/hooks</cucumber.hooks>
-		<cucumber.tags>@ok</cucumber.tags>
+		<cucumber.tags>@oki</cucumber.tags>
 		<pretty.plugin>--plugin pretty</pretty.plugin>
 		<cucumber.report>--plugin lippia.web.reporters.CucumberReporter:</cucumber.report>
 		<test-manager.report>--plugin lippia.web.reporters.TestManagerReporter:</test-manager.report>
 		<crowdar.cucumber.option>src/test/resources/web/features ${cucumber.hooks} ${cucumber.stepsDefinitions} --tags 'not @Ignore' --tags ${cucumber.tags} ${cucumber.report}</crowdar.cucumber.option>
-
+		<maven.build.timestamp.format>dd-MM-yyyy-HH-mm-ss</maven.build.timestamp.format>
+		<buildIdentifier>Ariadna_Garcia_Project_${maven.build.timestamp}</buildIdentifier>
 		<!-- client project custom properties -->
 		<web-app.url>https://clockify.me/en</web-app.url>
 
