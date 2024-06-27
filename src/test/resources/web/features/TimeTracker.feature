@@ -17,17 +17,22 @@ Feature: Creo un nuevo Workspace
     Then se crea un nuevo time entry
 
 
-  @ModificoElRegistroDeHoras @ok
+  @ModificoElRegistroDeHoras @----nomesale
   Scenario: Creo un nuevo registro de horas por API y modifico los datos del time entry
     And clickeo el boton " Stop "
-    When edito el nombre del time entry "NuevoTimeEntry"
-    And clickeo el boton "Project"
-    And clickeo el boton "LippiaFinalProject "
+    And clickea el boton Project
+    When clickeo el boton "LippiaFinalProject "
+    And clickeo el boton "ProyectoCrowdar "
+    And clickea el boton Tags
+    And clickeo el boton "Crowdar"
     And clickeo el boton " $ "
+    And modifico la hora de inicio "09:00"
+    And modifico la hora de finalizacion "18:00"
+    And selecciono el dia "13" del calendario
     Then se modifica el time entry
 
 
-  @CreoHorasYLasDescarto @--
+  @CreoHorasYLasDescarto @--exito
   Scenario: Creo un nuevo registro de horas pero lo cancelo
     And clickeo el boton "TIME TRACKER"
     And clickeo el timer relojito

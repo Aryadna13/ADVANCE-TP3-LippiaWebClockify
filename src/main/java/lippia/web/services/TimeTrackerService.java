@@ -46,8 +46,33 @@ public class TimeTrackerService {
         Assert.assertEquals(WebActionManager.getText(CommonConstants.CANCELLED_MESSAGE_XPATH), "Timer cancelled");
     }
 
-    public static void editTimeEntry(String NuevoNombre){
-        WebActionManager.click(TimeTrackerConstants.EDIT_INPUT_PROJECT_NAME);
-        WebActionManager.setInput(TimeTrackerConstants.EDIT_INPUT_PROJECT_NAME,NuevoNombre);
+    public static void editBegginigTimeEntry(String inicio){
+        WebActionManager.click(TimeTrackerConstants.EDIT_INPUT_BEGGINIG_HOUR);
+        WebActionManager.setInput(TimeTrackerConstants.EDIT_INPUT_BEGGINIG_HOUR,inicio);
     }
+
+    public static void editEndingTimeEntry(String fin){
+        WebActionManager.click(TimeTrackerConstants.EDIT_INPUT_ENDING_HOUR);
+        WebActionManager.setInput(TimeTrackerConstants.EDIT_INPUT_ENDING_HOUR,fin);
+    }
+
+    public static void editCalendar(){
+        WebActionManager.click(TimeTrackerConstants.EDIT_CALENDAR_BUTTON);
+    }
+
+    public static void projectSelect(){try {
+        // Espera de 2 segundos (2000 milisegundos)
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        // Manejo de la excepción
+        e.printStackTrace();
+    }
+        WebActionManager.click(TimeTrackerConstants.PROJECT_BUTTON);
+    }
+
+    public static void tagButton(){
+
+        WebActionManager.click(TimeTrackerConstants.TAG_BUTTON);
+    }
+
 }

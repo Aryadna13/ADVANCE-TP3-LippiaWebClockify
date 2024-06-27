@@ -1,5 +1,6 @@
 package lippia.web.steps;
 
+import com.crowdar.core.actions.WebActionManager;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -63,13 +64,34 @@ public class TimeTrackerSteps {
         TimeTrackerService.validarTimeEntryCancelado();
     }
 
-    @When("edito el nombre del time entry (.*)")
-    public void editoElNombreDelTimeEntry(String nuevoNombre) {
-        TimeTrackerService.editTimeEntry(nuevoNombre);
-    }
 
     @Then("se modifica el time entry")
     public void seModificaElTimeEntry() {
         //<div class="ng-tns-c78-28 toast-title ng-star-inserted" aria-label="Successfully updated description" style=""> Successfully updated description <!----></div>
+    }
+
+    @And("modifico la hora de inicio (.*)")
+    public void modificoLaHoraDeInicio(String hora) {
+        TimeTrackerService.editBegginigTimeEntry(hora);
+    }
+
+    @And("modifico la hora de finalizacion (.*)")
+    public void modificoLaHoraDeFinalizacion(String hora) {
+        TimeTrackerService.editEndingTimeEntry(hora);
+    }
+
+    @And("selecciono el dia (.*) del calendario")
+    public void seleccionoElDiaDelCalendario(String arg0) {
+        TimeTrackerService.editCalendar();
+    }
+
+    @When("clickea el boton Project")
+    public void clickeaElBotonProject() {
+TimeTrackerService.projectSelect();
+    }
+
+    @And("clickea el boton Tags")
+    public void clickeaElBotonTags() {
+        TimeTrackerService.tagButton();
     }
 }

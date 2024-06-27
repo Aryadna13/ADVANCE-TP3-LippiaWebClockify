@@ -17,6 +17,11 @@ public class TimeTrackerConstants {
 
 
     //EDIT_TIME_ENTRY
-    public static final String EDIT_INPUT_PROJECT_NAME = "xpath://input[@placeholder='Add description']";
+    public static final String PROJECT_BUTTON = "xpath:(//span[@tooltipiftexttoolong='' and contains(@class, 'cl-first-letter-uppercase') and text()='Project'])[2]";
 
+    public static final String TAG_BUTTON = "xpath://*[@id='layout-main']//entry-group[1]//parent-tracker-entry//tag-names";
+    public static final String EDIT_INPUT_BEGGINIG_HOUR = "xpath://*[@id=\"layout-main\"]//entry-group//time-tracker-entry//div[4]//single-date-picker2//input-time-ampm[1]/input";
+    public static final String EDIT_INPUT_ENDING_HOUR = "xpath://*[@id=\"layout-main\"]//entry-group//time-tracker-entry//div[4]//single-date-picker2//input-time-ampm[2]/input";
+
+    public static final String EDIT_CALENDAR_BUTTON = "xpath://input-single-date/span[@tabindex=\"0\"]";
 }

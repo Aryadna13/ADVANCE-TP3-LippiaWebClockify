@@ -5,14 +5,19 @@ import com.crowdar.driver.DriverManager;
 import lippia.web.constants.CommonConstants;
 import lippia.web.constants.LogInConstants;
 import lippia.web.constants.MyAccountConstants;
+import lippia.web.constants.ReportsConstants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 
+
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
@@ -89,7 +94,7 @@ public class BasicFunctionsService {
         System.out.println("do it 1");
         WebActionManager.click(MyAccountConstants.SETTINGS_BUTTON);
         System.out.println("do it 2");
-      WebActionManager.click(MyAccountConstants.LANGUAGE_BUTTON);
+        WebActionManager.click(MyAccountConstants.LANGUAGE_BUTTON);
         System.out.println("do it 3");
         WebDriver driver = new ChromeDriver();
         driver = DriverManager.getDriverInstance();
@@ -117,8 +122,44 @@ public class BasicFunctionsService {
                 break;
         }
 
-
-
     }
-}
+        public static class DownloadFileTest {
 
+            public void main(String[] args) {
+                // Configura la ruta del driver de Chrome
+                System.setProperty("webdriver.chrome.driver", "C:\\Users\\garci\\.m2\\repository\\chromedriver\\124.0.6367.91\\chromedriver-win64");
+
+                // Configura la ruta de descarga
+                String downloadFilepath = "C:\\Workspace";
+                Map<String, Object> prefs = new HashMap<>();
+                prefs.put("profile.default_content_settings.popups", 0);
+                prefs.put("download.default_directory", downloadFilepath);
+                prefs.put("download.prompt_for_download", false);
+                prefs.put("plugins.always_open_pdf_externally", true);
+
+                // Configura las opciones de Chrome
+                ChromeOptions options = new ChromeOptions();
+                options.setExperimentalOption("prefs", prefs);
+
+                // Inicializa el driver de Chrome con las opciones configuradas
+                WebDriver driver = new ChromeDriver(options);
+
+                try {
+                    // Realiza la acción para exportar a PDF
+                    WebActionManager.click(ReportsConstants.EXPORT_PDF_BUTTON);
+
+                    // Esperar que el archivo se descargue (opcional)
+                    Thread.sleep(5000); // Añade un tiempo de espera si es necesario
+
+                    // Verificar que el archivo se ha descargado (opcional)
+                    // File file = new File(downloadFilepath + "/expectedFileName.pdf");
+                    // if (file.exists()) {
+                    //     System.out.println("El archivo se ha descargado correctamente.");
+                    // } else {
+                    //     System.out.println("El archivo no se ha descargado.");
+                    // }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }}

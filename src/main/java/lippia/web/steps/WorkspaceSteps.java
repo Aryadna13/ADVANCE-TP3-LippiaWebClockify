@@ -19,6 +19,7 @@ public class WorkspaceSteps {
     @And("clickeo el boton (.*)")
     public void clickeoElBotonLoginLandingPage(String Boton){
         LogInService.commonButton(Boton);
+
     }
     @And("nombro mi nuevo workspace (.*)$")
     public void nombroMiNuevoWorkspace(String workspace) {
